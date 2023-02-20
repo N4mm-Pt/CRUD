@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/Material-Module';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../Service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +13,22 @@ import { UserService } from '../Service/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private service: UserService){}
+  
+  constructor(private service: UserService,private route: Router){}
 
   respdata : any;
 
   ProdceedLogin(logindata:any){
     if(logindata.valid){
-      this.service.ProdceedLogin(logindata.value).subscribe(item => {
-        this.respdata.item
-        console.log(this.respdata)
-      });
+      localStorage.setItem('token',logindata.value);
+      this.route.navigate(['home']);
     }
-    console.log(logindata.value);
+    else{
+      alert("login failed");
+    }
+  }
+
+  RedirectRegister(){
+    this.route.navigate(['access/register']);
   }
 }

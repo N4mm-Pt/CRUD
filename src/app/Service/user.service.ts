@@ -7,12 +7,20 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
   constructor(private http: HttpClient) {
+    
+  }
 
-   }
+  IsLoggedIn(){
+    return localStorage.getItem('token')!=null;
+  }
 
-   ProdceedLogin(inputdata: any){
-    return this.http.post('https://localhost:44308/User/Authenticate', inputdata);
-   }
+  GetToken(){
+    return localStorage.getItem('token')!=null?localStorage.getItem('token'):"";
+  }
+
+  Registeration(inputdata: any){
+    
+  }
 }
 
 
